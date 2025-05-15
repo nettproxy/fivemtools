@@ -29,7 +29,7 @@
 ### Installation
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/PhantomGuardAnticheat/fivemtools/
+   git clone https://github.com/nettproxy/fivemtools.git
    cd fivemtools
 
 
