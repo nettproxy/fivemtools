@@ -13,6 +13,7 @@ import {
   ArrowUpDown,
   Tag,
   Terminal,
+  Server,
 } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
@@ -27,20 +28,6 @@ import { Separator } from "@/components/ui/separator"
 const anticheats = [
   {
     id: 1,
-    name: "PhantomGuard",
-    description: "Advanced anticheat solution with a wide range of features",
-    price: "25€/month",
-    website: "",
-    status: "Premium",
-    thingy2: "Recommended",
-    thingy3: "Reliable",
-    detectionRate: 95,
-    falsePositives: "Very Low",
-    category: "Premium",
-    tags: ["lua executor protection", "resource protection", "entity protection", "anti-cheat"],
-  },
-  {
-    id: 2,
     name: "WaveShield",
     description: "WaveShield is a paid anticheat solution for FiveM servers.",
     price: "50€/month",
@@ -54,7 +41,7 @@ const anticheats = [
     tags: ["lua executor protection", "resource protection", "entity protection"],
   },
   {
-    id: 3,
+    id: 2,
     name: "FiveGuard",
     description: "FiveGuard is a paid anticheat solution for FiveM servers.",
     price: "45€/month",
@@ -93,7 +80,7 @@ const anticheats = [
     tags: ["shitty"],
   },
   {
-    id: 4,
+    id: 3,
     name: "Sentic AntiCheat",
     description: "Sentic AntiCheat is a paid anticheat solution for FiveM servers.",
     price: "5€/month",
@@ -132,7 +119,7 @@ const anticheats = [
     tags: ["lua executor protection", "resource protection", "entity protection"],
   },
   {
-    id: 10,
+    id: 4,
     name: "ElectronAC",
     description: "ElectronAC is a paid anticheat solution for FiveM servers.",
     price: "35€/month",
@@ -153,7 +140,7 @@ export default function Home() {
 
   const filteredAnticheats = anticheats.filter((ac) => {
     const matchesSearch =
-      ac.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ac.name.toLowerCase().includes(searchTerm.toLowerCase()) ||s
       ac.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ac.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
 
@@ -238,14 +225,34 @@ export default function Home() {
     }
   }
 
+  const gotoAntiCheatList = () => {
+    window.location.href = "/anticheat-list"
+  }
+
+  const gotoServerResolver = () => {
+    window.location.href = "/"
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-background dark">
-      <header className="border-b">
-        <div className="container max-w-6xl mx-auto flex items-center justify-between h-16 px-4">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-pink-500 via-pink-400 via-white via-blue-400 to-blue-500 bg-clip-text text-transparent">
-              <Shield className="inline mr-2 mb-1 h-5 w-5 text-pink-500" /> fivemtools - AntiCheat List
-            </h1>
+    <header className="border-b">
+      <div className="container max-w-5xl mx-auto flex items-center justify-between h-16 px-4">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-pink-500 via-pink-400 via-white via-blue-400 to-blue-500 bg-clip-text text-transparent">
+            <Server className="inline mr-2 mb-1 h-5 w-5 text-pink-500" /> fivemtools - Server Resolver
+          </h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <nav className="flex items-center gap-2">
+            <Button variant="ghost" className="text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors border"
+            onClick={() => gotoServerResolver()}>
+              Server Resolver
+            </Button>
+            <Button variant="ghost" className="text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors border"
+            onClick={() => gotoAntiCheatList()}>
+              AntiCheat List
+            </Button>
+          </nav>
           </div>
           <div className="flex items-center gap-2">
             <HoverCard>
@@ -472,11 +479,8 @@ export default function Home() {
               © 2025 fivemtools. Not affiliated with FiveM or Cfx.re.
             </div>
             <div className="flex items-center gap-4 mt-4 md:mt-0">
-              <Button onClick={() => window.open("https://github.com/phantomguardanticheat", "_blank")} variant="ghost" size="sm">
+              <Button onClick={() => window.open("https://github.com/nettproxy/fivemtools", "_blank")} variant="ghost" size="sm">
                 GitHub
-              </Button>
-              <Button onClick={() => window.open("https://discord.gg/phantomguard", "_blank")} variant="ghost" size="sm">
-                Discord
               </Button>
             </div>
           </div>

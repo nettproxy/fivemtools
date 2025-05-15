@@ -251,50 +251,71 @@ export default function Home() {
     "ms-MY": "Malay",
     "id-ID": "Indonesian",    
   }
+
+  const gotoAntiCheatList = () => {
+    window.location.href = "/anticheat-list"
+  }
+
+  const gotoServerResolver = () => {
+    window.location.href = "/"
+  }
   
   let locale = localeMap[serverData?.Data.vars.locale as keyof typeof localeMap] || serverData?.Data.vars.locale;
-
   return (
     <div className="flex flex-col min-h-screen bg-background dark">
       <header className="border-b">
         <div className="container max-w-5xl mx-auto flex items-center justify-between h-16 px-4">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-pink-500 via-pink-400 via-white via-blue-400 to-blue-500 bg-clip-text text-transparent"><Server className="inline mr-2 mb-1 h-5 w-5 text-pink-500" /> fivemtools - Server Lookup</h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-pink-500 via-pink-400 via-white via-blue-400 to-blue-500 bg-clip-text text-transparent">
+              <Server className="inline mr-2 mb-1 h-5 w-5 text-pink-500" /> fivemtools - Server Resolver
+            </h1>
           </div>
-          <div className="flex items-center gap-2">
-          <HoverCard>
-          <HoverCardTrigger>
-          <Button variant="outline" className="mb-3 h-12 px-6 text-base font-medium m-4 " onClick={() => {
-              setServerData(null)
-              setCfxId("")
-              setError(null)
-              toast.success("Data removed successfully!", {
-                description: "for CFX ID: " + cfxId,
+          <div className="flex items-center gap-4">
+            <nav className="flex items-center gap-2">
+            <Button variant="ghost" className="text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors border"
+            onClick={() => gotoServerResolver()}>
+              Server Resolver
+            </Button>
+            <Button variant="ghost" className="text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors border"
+            onClick={() => gotoAntiCheatList()}>
+              AntiCheat List
+            </Button>
+            </nav>
+            <HoverCard>
+              <HoverCardTrigger>
+                <Button 
+                  variant="outline" 
+                  className="h-10 px-4 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground border" 
+                  onClick={() => {
+                    setServerData(null)
+                    setCfxId("")
+                    setError(null)
+                    toast.success("Data removed successfully!", {
+                      description: "for CFX ID: " + cfxId,
                     })
-              }}>
-                <BadgeAlertIcon className="animate-spin" /> Clear Input
-              </Button>
+                  }}
+                >
+                  <BadgeAlertIcon className="h-4 w-4 mr-2" /> Clear Input
+                </Button>
               </HoverCardTrigger>
-          <HoverCardContent>
-          <div className="flex justify-between space-x-4">
-          <div className="space-y-1">
-            <h4 className="text-sm font-semibold">Help</h4>
-            <p className="text-sm">
-              Use this button to clear the current server data and show the input again.
-            </p>
-            <div className="flex items-center pt-2">
-              <span className="text-xs text-muted-foreground">
-                made by proxy
-              </span>
-            </div>
+              <HoverCardContent>
+                <div className="flex justify-between space-x-4">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">Help</h4>
+                    <p className="text-sm">
+                      Use this button to clear the current server data and show the input again.
+                    </p>
+                    <div className="flex items-center pt-2">
+                      <span className="text-xs text-muted-foreground">
+                        made by proxy
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
           </div>
         </div>
-          </HoverCardContent>
-        </HoverCard>
-          </div>
-          
-        </div>
-        
       </header>
 
       <div className="container max-w-5xl mx-auto py-6 px-4">
@@ -308,18 +329,18 @@ export default function Home() {
           </Alert>
         )}
       
-      {!serverData && (
-        <Card className="mb-8 shadow-lg border-muted bg-card">
-          <CardContent className="pt-6">
-            <div className="flex gap-2">
-              <div className="flex-1">
+        {!serverData && (
+          <Card className="mb-8 shadow-lg border-muted bg-card">
+            <CardContent className="pt-6">
+              <div className="flex gap-2">
+                <div className="flex-1">
                   <Input
                     placeholder="Enter CFX ID (e.g., abcd123)"
                     value={cfxId}
                     onChange={(e) => setCfxId(e.target.value)}
                     className="h-12 text-base px-3 py-1"
                   />
-              </div>
+                </div>
               <Button variant="default" className="ml-2 h-12 px-6 text-base font-medium bw-full bg-gradient-to-r from-pink-400 to-pink-600 hover:from-pink-500 hover:to-pink-700 text-white text-white shadow-lg" onClick={() => setShowConfirmDialog(true)} disabled={loading}>
                 {loading ? "Resolving..." : <><Send /> Get Info</>}
               </Button>
